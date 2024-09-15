@@ -1,7 +1,7 @@
 package domain.entities;
 
 public class Mercado {
-    private String mercado;
+    private final String mercado;
 
     public Mercado(String mercado) {
         this.mercado = mercado;
@@ -9,10 +9,5 @@ public class Mercado {
 
     public String getMercado() {
         return mercado;
-    }
-
-    public Mercado setMercado(String mercado) {
-        this.mercado = mercado;
-        return this;
     }
 }

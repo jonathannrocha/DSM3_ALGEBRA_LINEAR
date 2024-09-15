@@ -4,7 +4,7 @@ public class Ingrediente {
     private String nome;
     private String mercadoCompra;
     private double valorCompra;
-    private Integer lanche;
+    private final Integer lanche;
 
     public Ingrediente(String nome, String mercadoCompra, double valorCompra, Integer lanche) {
         this.nome = nome;
@@ -15,11 +15,6 @@ public class Ingrediente {
 
     public String getNome() {
         return nome;
-    }
-
-    public Ingrediente setNome(String nome) {
-        this.nome = nome;
-        return this;
     }
 
     public String getMercadoCompra() {

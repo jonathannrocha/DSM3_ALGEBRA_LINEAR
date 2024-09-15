@@ -20,17 +20,14 @@ public class SolicitarInfos {
         System.out.println(" Qual a margem do lanche (0.00)?");
         Double margen = scanner.nextDouble();
 
-        Lanche lanche = new Lanche(nome, margen);
-
-        return lanche;
+        return new Lanche(nome, margen);
     }
 
     public Mercado CriarMercado() {
         System.out.println("Qual é o nome do mercado?");
         String nome =scanner.next();
-        Mercado mercado = new Mercado(nome);
 
-        return mercado;
+        return new Mercado(nome);
     }
 
     public Ingrediente CriarIngrediente(List<Lanche> lanches, List<Mercado> mercados) {
@@ -91,15 +88,10 @@ public class SolicitarInfos {
             }
 
         }
-
-
-        Ingrediente ingre = new Ingrediente(nome, nomeMercado ,valorCompra, lancheEscolhido );
-        return ingre;
+        return new Ingrediente(nome, nomeMercado ,valorCompra, lancheEscolhido );
     }
 
     public void ValorLanches(List<Lanche> lanches, List<Ingrediente> ingredientes, List<Mercado> mercados) {
-        String lancheAtua;
-        String mercadoAtual;
         Lanche lancheAtual;
         for(int lan = 0; lan < lanches.size(); lan++) {
             lancheAtual = lanches.get(lan);
@@ -118,7 +110,26 @@ public class SolicitarInfos {
 
             }
         }
+    }
+
+    public void ValorVenda(List<Lanche> lanches, List<Ingrediente> ingredientes, List<Mercado> mercados) {
+        Lanche lancheAtual;
+        for(int lan = 0; lan < lanches.size(); lan++) {
+            lancheAtual = lanches.get(lan);
+            for (Mercado mer : mercados) {
+                double valor = 0;
+                for (Ingrediente ing : ingredientes) {
+                    if (
+                            Objects.equals(ing.getLanche(),  lan) &&
+                                    Objects.equals(mer.getMercado(), ing.getMercadoCompra())
+                    ) {
+                        valor += ing.getValorCompra() * (1 + lancheAtual.getMargem());
+                    }
+                }
+                System.out.println("Lanche: "+ lancheAtual.getNome() + ", mercado: " + mer.getMercado() + ",valor: " + valor);
 
 
+            }
+        }
     }
 }

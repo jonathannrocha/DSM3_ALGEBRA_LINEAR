@@ -28,6 +28,7 @@ public class Main {
             System.out.println("3 - Adicionar ingrediente");
             System.out.println("4 - Ver custo do lanche");
             System.out.println("5 - Ver valor de venda do lanche");
+            System.out.println("6 - Sair");
 
             int opcao = scanner.nextInt();
 
@@ -52,6 +53,15 @@ public class Main {
                         System.out.println("Adicione um lanche antes");
                     }
                     break;
+                case 5:
+                    if(!lanches.isEmpty()) {
+                        solicitarInfos.ValorVenda(lanches, ingredientes, mercados);
+                    } else {
+                        System.out.println("Adicione um lanche antes");
+                    }
+                    break;
+                case 6:
+                    rodar = false;
 
             }
         }
