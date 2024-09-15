@@ -1,45 +1,59 @@
+
+import domain.SolicitarInfos;
 import domain.entities.Ingrediente;
 import domain.entities.Lanche;
-import domain.entities.RelacaoPrecos;
+import domain.entities.Mercado;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Lanche l1 = new Lanche("Jubileu", 0);
-        Lanche l2 = new Lanche("Jubileu2", 0);
+        Scanner scanner = new Scanner(System.in);
+        List<Lanche> lanches = new ArrayList<>();
+        List<Ingrediente> ingredientes = new ArrayList<>();
+        List<Mercado> mercados = new ArrayList<>();
 
-        Ingrediente ing1 = new Ingrediente("tomate", "mercado1", 12.2);
-        Ingrediente ing2 = new Ingrediente("tomate", "mercado2", 13.2);
-        Ingrediente ing3 = new Ingrediente("carne", "mercado1", 12.2);
-        Ingrediente ing4 = new Ingrediente("carne", "mercado2", 12.2);
-        Ingrediente ing5 = new Ingrediente("cebola", "mercado1", 12.2);
-        Ingrediente ing6 = new Ingrediente("cebola", "mercado2", 12.2);
-        Ingrediente ing7 = new Ingrediente("pão", "mercado1", 2.2);
-        Ingrediente ing8 = new Ingrediente("pão", "mercado2", 2);
+        SolicitarInfos solicitarInfos = new SolicitarInfos();
 
-        RelacaoPrecos relacaoPrecos = new RelacaoPrecos();
-        relacaoPrecos.addItem(ing2);
-        relacaoPrecos.addItem(ing3);
-        relacaoPrecos.addItem(ing1);
-        relacaoPrecos.addItem(ing4);
-        relacaoPrecos.addItem(ing5);
-        relacaoPrecos.addItem(ing6);
-        relacaoPrecos.addItem(ing7);
-        relacaoPrecos.addItem(ing8);
-
-        l1.setIngredientes(relacaoPrecos.getRelacaoMercado("mercado2"));
-        l2.setIngredientes(relacaoPrecos.getRelacaoMercado("mercado1"));
+        boolean rodar = true;
 
 
-        System.out.printf("total:"+ l1.valorLanche() + "\n");
-        System.out.printf("total:"+ l2.valorLanche()+ "\n");
+        while (rodar) {
+            System.out.println("Lanchonete Velozes e saborosos:");
+            System.out.println("1 - Criar lanche");
+            System.out.println("2 - Adicionar Mercado");
+            System.out.println("3 - Adicionar ingrediente");
+            System.out.println("4 - Ver custo do lanche");
+            System.out.println("5 - Ver valor de venda do lanche");
 
-        l1.setMargem(0.5);
+            int opcao = scanner.nextInt();
 
-        System.out.printf("total:"+ l1.valorLanche()+ "\n");
+            switch (opcao ) {
+                case 1:
+                   lanches.add(solicitarInfos.CriarLanche());
+                   break;
+                case 2:
+                        mercados.add(solicitarInfos.CriarMercado());
+                    break;
+                case 3:
+                    if(!lanches.isEmpty() && !mercados.isEmpty()) {
+                        ingredientes.add(solicitarInfos.CriarIngrediente( lanches,mercados ));
+                    } else {
+                        System.out.println("Adicione um lanche antes");
+                    }
+                    break;
+                case 4:
+                    if(!lanches.isEmpty()) {
+                        solicitarInfos.ValorLanches(lanches, ingredientes, mercados);
+                    } else {
+                        System.out.println("Adicione um lanche antes");
+                    }
+                    break;
 
-        l1.setMargem(1);
-
-        System.out.printf("total:"+ l1.valorLanche()+ "\n");
+            }
+        }
     }
 }

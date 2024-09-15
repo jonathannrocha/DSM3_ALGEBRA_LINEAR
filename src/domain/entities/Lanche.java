@@ -6,7 +6,8 @@ import java.util.List;
 public class Lanche {
     private String nome;
     private double margem;
-    private List<Ingrediente> ingredientes = new ArrayList<>();
+    private double valor;
+    private double valorComMargem;
 
     public Lanche(String nome, double margem) {
         this.nome = nome;
@@ -32,26 +33,13 @@ public class Lanche {
         return this;
     }
 
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
-
-    public Lanche setIngredientes( List<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
+    public Lanche setValor(double valor) {
+        this.valor = valor;
         return this;
     }
 
-    public double valorLanche () {
-        double lanche = 0;
-        for( Ingrediente item : this.ingredientes ){
-            lanche += item.getValorCompra() * ( 1 + this.margem ) ;
-        }
-
-        return lanche;
-    }
-    public Lanche AddIngredientes(Ingrediente ingredientes, String mercado) {
-        this.ingredientes.add(ingredientes);
-        return this;
+    public double getValor() {
+        return valor;
     }
 
     @Override
@@ -59,7 +47,6 @@ public class Lanche {
         return "Lanche{" +
                 "nome='" + nome + '\'' +
                 ", margem=" + margem +
-                ", ingredientes=" + ingredientes +
                 '}';
     }
 }

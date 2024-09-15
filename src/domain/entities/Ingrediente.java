@@ -4,11 +4,13 @@ public class Ingrediente {
     private String nome;
     private String mercadoCompra;
     private double valorCompra;
+    private Integer lanche;
 
-    public Ingrediente(String nome, String mercadoCompra, double valorCompra) {
+    public Ingrediente(String nome, String mercadoCompra, double valorCompra, Integer lanche) {
         this.nome = nome;
         this.mercadoCompra = mercadoCompra;
         this.valorCompra = valorCompra;
+        this.lanche = lanche;
     }
 
     public String getNome() {
@@ -36,6 +38,10 @@ public class Ingrediente {
     public Ingrediente setValorCompra(double valorCompra) {
         this.valorCompra = valorCompra;
         return this;
+    }
+
+    public Integer getLanche() {
+        return lanche;
     }
 
     @Override
